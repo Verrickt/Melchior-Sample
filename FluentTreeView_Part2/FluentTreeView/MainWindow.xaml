@@ -9,7 +9,7 @@
     Title="MainWindow"
     Width="800"
     Height="450"
-    fw:AcrylicWindow.Enabled="True"
+    fw:AcrylicWindow.Enabled="False"
     mc:Ignorable="d">
     <Window.DataContext>
         <local:MainViewModel></local:MainViewModel>

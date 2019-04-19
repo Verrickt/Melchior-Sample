@@ -30,9 +30,9 @@ namespace FluentTreeView
 
     class MainViewModel : ViewModelBase
     {
-        private ObservableCollection<TreeViewVMBase> _treeViewBase;
+        private ObservableCollection<TreeVMBase> _treeViewBase;
 
-        public ObservableCollection<TreeViewVMBase> TreeViewBase
+        public ObservableCollection<TreeVMBase> TreeViewBase
         {
             get { return _treeViewBase; }
             set { Set(ref _treeViewBase, value); }
@@ -52,7 +52,7 @@ namespace FluentTreeView
                 new TreeNodeVM("Node2",leafs),
                 new TreeNodeVM("Node3",leafs.Skip(1).Take(1))
             };
-            TreeViewBase = new ObservableCollection<TreeViewVMBase>(new[]
+            TreeViewBase = new ObservableCollection<TreeVMBase>(new[]
             {
                 new TreeNodeVM("Root1",nodes),
                 new TreeNodeVM("Root2",nodes)
@@ -61,11 +61,10 @@ namespace FluentTreeView
 
     }
 
-    abstract class TreeViewVMBase : ViewModelBase
+    abstract class TreeVMBase : ViewModelBase
     {
 
-        public abstract ObservableCollection<TreeViewVMBase> Items { get; set; }
-        
+        public abstract ObservableCollection<TreeVMBase> Items { get; set; }
 
         private string _name;
 
@@ -75,23 +74,20 @@ namespace FluentTreeView
             private set { Set(ref _name, value); }
         }
 
-        protected static IEnumerable<TreeViewVMBase> Empty => Enumerable.Empty<TreeViewVMBase>();
+        protected static IEnumerable<TreeVMBase> Empty => Enumerable.Empty<TreeVMBase>();
 
-        public TreeViewVMBase(string name)
+        public TreeVMBase(string name)
         {
             Name = name;
-            // calling child from base ctor. Bad practice!!!
-            // https://stackoverflow.com/a/119531
-            //Items = new ObservableCollection<TreeViewVMBase>(LoadItems() ?? Empty);
         }
      
 
     }
 
-    class TreeNodeVM : TreeViewVMBase
+    class TreeNodeVM : TreeVMBase
     {
-        private ObservableCollection<TreeViewVMBase> _items;
-        public override ObservableCollection<TreeViewVMBase> Items
+        private ObservableCollection<TreeVMBase> _items;
+        public override ObservableCollection<TreeVMBase> Items
         {
             get
             {
@@ -104,17 +100,17 @@ namespace FluentTreeView
             }
         }
 
-        public TreeNodeVM(string name, IEnumerable<TreeViewVMBase> items) : base(name)
+        public TreeNodeVM(string name, IEnumerable<TreeVMBase> items) : base(name)
         {
-            _items = new ObservableCollection<TreeViewVMBase>(items??Empty);
+            _items = new ObservableCollection<TreeVMBase>(items??Empty);
         }
 
 
     }
-    class TreeLeafVM : TreeViewVMBase
+    class TreeLeafVM : TreeVMBase
     {
-        private static readonly ObservableCollection<TreeViewVMBase> _items = new ObservableCollection<TreeViewVMBase>();
-        public override ObservableCollection<TreeViewVMBase> Items
+        private static readonly ObservableCollection<TreeVMBase> _items = new ObservableCollection<TreeVMBase>();
+        public override ObservableCollection<TreeVMBase> Items
         {
             get
             {
