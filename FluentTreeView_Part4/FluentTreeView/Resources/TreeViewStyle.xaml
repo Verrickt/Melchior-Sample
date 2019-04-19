@@ -6,22 +6,43 @@
         <Setter Property="Template" >
             <Setter.Value>
                 <ControlTemplate TargetType="TreeViewItem">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="24"></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
+                    <Grid >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition Height="*"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Expander IsExpanded="{Binding RelativeSource={RelativeSource TemplatedParent},Path=IsExpanded,Mode=TwoWay}" x:Name="expander"></Expander>
-                        <ContentPresenter VerticalAlignment="Center" Grid.Column="1" ContentSource="Header"></ContentPresenter>
-                        <ItemsPresenter Visibility="{Binding RelativeSource={RelativeSource TemplatedParent},Path=IsExpanded,Converter={StaticResource BoolToVisibilityConverter}}" Grid.Row="1" Grid.Column="1"></ItemsPresenter>
+                        <Border x:Name="root">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Red"></Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Grid>
+                                <Rectangle x:Name="selector" Width="2" Visibility="Collapsed" Fill="Green" HorizontalAlignment="Left"></Rectangle>
+                                <Grid  Margin="{Binding RelativeSource={RelativeSource AncestorType=TreeViewItem},Converter={StaticResource TreeLevelToIndentConverter}}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="24"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Expander IsExpanded="{Binding RelativeSource={RelativeSource TemplatedParent},Path=IsExpanded,Mode=TwoWay}" x:Name="expander"></Expander>
+                                    <ContentPresenter VerticalAlignment="Center" Grid.Column="1" ContentSource="Header"></ContentPresenter>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        <ItemsPresenter Visibility="{Binding RelativeSource={RelativeSource TemplatedParent},Path=IsExpanded,Converter={StaticResource BoolToVisibilityConverter}}" Grid.Row="1" ></ItemsPresenter>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="HasItems" Value="False">
                             <Setter TargetName="expander" Property="Visibility" Value="Collapsed"></Setter>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="selector" Property="Visibility" Value="Visible"></Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

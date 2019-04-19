@@ -4,4 +4,5 @@
                     xmlns:local="clr-namespace:FluentTreeView.Resources">
     <c:BoolToVisibilityConverter Inverted="False" x:Key="BoolToVisibilityConverter"></c:BoolToVisibilityConverter>
     <c:BoolToVisibilityConverter Inverted="True" x:Key="InvertedBoolToVisibilityConverter"></c:BoolToVisibilityConverter>
+    <c:TreeLevelToIndentConverter Margin="24,0,0,0" x:Key="TreeLevelToIndentConverter"></c:TreeLevelToIndentConverter>
 </ResourceDictionary>
