@@ -21,7 +21,7 @@
                                     </Style.Triggers>
                                 </Style>
                             </Border.Style>
-                            <Grid>
+                            <Grid Background="Transparent" x:Name="selectorGrid">
                                 <Rectangle x:Name="selector" Width="2" Visibility="Collapsed" Fill="Green" HorizontalAlignment="Left"></Rectangle>
                                 <Grid  Margin="{Binding RelativeSource={RelativeSource AncestorType=TreeViewItem},Converter={StaticResource TreeLevelToIndentConverter}}">
                                     <Grid.ColumnDefinitions>
@@ -43,6 +43,7 @@
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter TargetName="selector" Property="Visibility" Value="Visible"></Setter>
+                            <Setter TargetName="selectorGrid" Property="Background" Value="Blue"></Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
