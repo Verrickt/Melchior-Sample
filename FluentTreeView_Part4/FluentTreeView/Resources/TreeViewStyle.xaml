@@ -1,0 +1,31 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:FluentTreeView.Resources">
+    
+    <Style TargetType="TreeViewItem">
+        <Setter Property="Template" >
+            <Setter.Value>
+                <ControlTemplate TargetType="TreeViewItem">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="24"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Expander IsExpanded="{Binding RelativeSource={RelativeSource TemplatedParent},Path=IsExpanded,Mode=TwoWay}" x:Name="expander"></Expander>
+                        <ContentPresenter VerticalAlignment="Center" Grid.Column="1" ContentSource="Header"></ContentPresenter>
+                        <ItemsPresenter Visibility="{Binding RelativeSource={RelativeSource TemplatedParent},Path=IsExpanded,Converter={StaticResource BoolToVisibilityConverter}}" Grid.Row="1" Grid.Column="1"></ItemsPresenter>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="HasItems" Value="False">
+                            <Setter TargetName="expander" Property="Visibility" Value="Collapsed"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
