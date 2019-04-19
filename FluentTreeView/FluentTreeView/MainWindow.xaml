@@ -1,0 +1,39 @@
+﻿<Window
+    x:Class="FluentTreeView.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+    xmlns:local="clr-namespace:FluentTreeView"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    fw:AcrylicWindow.Enabled="True"
+    mc:Ignorable="d">
+    <Window.DataContext>
+        <local:MainViewModel></local:MainViewModel>
+    </Window.DataContext>
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <TreeView ItemsSource="{Binding TreeViewBase}" >
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Items}">
+                        <Grid>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </Grid>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+        </Grid>
+        <Grid Background="{DynamicResource SystemAltHighColorBrush}" Grid.Column="1">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                       FontSize="30" 
+                       >Hello world</TextBlock>
+        </Grid>
+    </Grid>
+</Window>
