@@ -1,0 +1,8 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:c="clr-namespace:FluentTreeView.Resources.Converters"
+                    xmlns:local="clr-namespace:FluentTreeView.Resources">
+    <c:BoolToVisibilityConverter Inverted="False" x:Key="BoolToVisibilityConverter"></c:BoolToVisibilityConverter>
+    <c:BoolToVisibilityConverter Inverted="True" x:Key="InvertedBoolToVisibilityConverter"></c:BoolToVisibilityConverter>
+    <c:TreeLevelToIndentConverter Margin="24,0,0,0" x:Key="TreeLevelToIndentConverter"></c:TreeLevelToIndentConverter>
+</ResourceDictionary>
